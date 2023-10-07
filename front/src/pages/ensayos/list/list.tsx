@@ -2,7 +2,8 @@
 
 export const BandaLista = () => {
     return (
-        <div></div>
+        <div>
+        </div>
     );
 }
 
