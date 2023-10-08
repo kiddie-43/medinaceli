@@ -1,16 +1,18 @@
-import { setListaEnsayosLoading } from "../../reducers/ensayos/list";
+import { setListaEnsayos, setListaEnsayosLoading } from "../../reducers/ensayos/list";
 import { AppThunk } from "../../store";
 
 export const fetchEnsayosMedinaceli = (): AppThunk => async (dispatch) => {
     try {
 
         dispatch(setListaEnsayosLoading(true));
-        await fetch('https://api.github.com/users/workshopsjsmvd')
+        await fetch('http://localhost/medinaceli/back/ensayos/obtenerEnsayos.php')
             .then(res => {
                 return res.json();
             })
             .then(res => {
+                dispatch(setListaEnsayos(res));
 
+                console.log(res)
             });
 
     } catch (error) {

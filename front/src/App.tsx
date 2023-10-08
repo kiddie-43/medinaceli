@@ -49,7 +49,6 @@ export const App = () => {
             value: ButtonHeaderActions.find((item) => item.value === value)
               ?.label,
           };
-          debugger;
           setValue(value);
           navigate(value);
 

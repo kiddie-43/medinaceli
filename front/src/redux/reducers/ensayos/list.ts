@@ -8,18 +8,18 @@ interface IListaEnsayosState {
 
 const initialState: IListaEnsayosState = {
     loading: false,
-    list: [
-        {
-            assisted: ["5"],
-            date: "08/10/2023",
-            endOn: "20:00",
-            id: 1,
-            notAssisted: ["5"],
-            startOn: "19:00"
+    // list: [
+    //     {
+    //         assisted: ["5"],
+    //         date: "08/10/2023",
+    //         endOn: "20:00",
+    //         id: 1,
+    //         notAssisted: ["5"],
+    //         startOn: "19:00"
 
-        }
+    //     }
 
-    ]
+    // ]
 };
 
 const listaEnsayosReducer = createSlice({
