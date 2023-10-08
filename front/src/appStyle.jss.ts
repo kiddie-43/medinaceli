@@ -2,7 +2,7 @@ import { createUseStyles } from 'react-jss'
 export const AppStyle = createUseStyles({
     appContainer: {
         height: "calc(100vh - 1rem)", 
-        background:"grey"
+       
     },
     main: {
         width: "100%",

@@ -1,23 +1,38 @@
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+
 import { useState } from "react";
 import { BotomHeaderStyle } from "./bottomNavBarStyle.jss";
-export const BotomHeader = () => {
-    const [value, setValue] = useState(0);
-    const style = BotomHeaderStyle();
+import { useNavigate } from "react-router-dom";
+import { RoutesApp } from "../../routes/routes";
+import { Routes } from "../../common/enums/routes";
+interface IBottomHeaderProps {
+    onChange: (event: any, value: any) => any;
+    value: any;
+    options: IBottomHeaderItemProps[]
+}
 
-    return <div className={style.container}> <BottomNavigation
-        showLabels
-        value={value}
-        onChange={(event, newValue) => {
-            setValue(newValue);
-        }}
-    >
-        <BottomNavigationAction label="Banda" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Ensayos" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Perfil" disabled icon={<LocationOnIcon />} />
-    </BottomNavigation>
+export interface IBottomHeaderItemProps {
+    value: string;
+    label: string;
+    icon: React.ReactNode
+}
+export const BottomHeader: React.FC<IBottomHeaderProps> = ({ onChange, value, options }) => {
+
+    const style = BotomHeaderStyle();
+    return <div className={style.container}>
+
+
+        <BottomNavigation
+            showLabels
+            value={value}
+            onChange={onChange}
+        >
+            {options.map(item => {
+                return <BottomNavigationAction value={item.value} label={item.label} icon={item.icon} />
+            })}
+
+
+
+        </BottomNavigation>
     </div>
 }
