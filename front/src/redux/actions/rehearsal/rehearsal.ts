@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { HttpMethod } from "../../../common/enums/metod";
 import { httpData } from "../../../common/utils/http/httpMapin";
 import { resetState, setRehearsalFormLoading } from "../../reducers/rehearsal/form";
@@ -7,6 +8,8 @@ import {
 } from "../../reducers/rehearsal/list";
 import store, { AppThunk } from "../../store";
 import axios from "axios";
+import { FormatDate } from "../../../common/utils/date/dateFormat";
+import { IRehearsalFormApi } from "../../../modelos/ensayos/IEnsayos";
 
 const apiUrl = `${process.env.REACT_APP_API_URL}/rehearsal/rehearsal.php`;
 
@@ -19,9 +22,9 @@ export const fetchRehearsalList = (): AppThunk => async (dispatch) => {
     await axios
       .post(apiUrl, httpData(HttpMethod.GET, data))
       .then((res) => {
-        return JSON.parse(res.data);
-      }).then((res) => {
-        dispatch(setRehearsalList(res));
+
+        dispatch(setRehearsalList(res.data));
+        return;
       })
       .catch((response) => {
         console.log(response)
@@ -38,19 +41,17 @@ export const postRehearsalForm = (): AppThunk => async (dispatch) => {
   try {
     const { form } = store.getState().rehearsalForm
 
-    let data = {
-      form: form,
-    };
     dispatch(setRehearsalFormLoading(true));
     await axios
-      .post(apiUrl, httpData(HttpMethod.GET, data))
+      .post(apiUrl, httpData(HttpMethod.POST, { ...form, date: dayjs(form.date).format(FormatDate.DATE) }))
       .then((res) => {
-        dispatch(setRehearsalList(res.data));
+
+        // dispatch(setRehearsalList(res.data));
       })
       .catch((response) => {
       });
 
-    dispatch(resetState());
+    //  dispatch(resetState());
   } catch (error) {
 
   } finally {
@@ -58,10 +59,14 @@ export const postRehearsalForm = (): AppThunk => async (dispatch) => {
   }
 };
 
+// const mapMusicianList = (assisted:string[], notAssisted:string[])=> {
+// let list =[];
+// assisted.map(())
+
+// }
 
 export const resetRehearsalForm = (): AppThunk => async (dispatch) => {
   dispatch(resetState());
-
 };
 
 

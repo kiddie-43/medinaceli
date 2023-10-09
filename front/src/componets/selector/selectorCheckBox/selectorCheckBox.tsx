@@ -65,13 +65,13 @@ useEffect(()=>{
             }}
           >
             {(selected as string[]).map((value) => (
-              <Chip key={value} label={value} />
+              <Chip key={value} label={options.find(item => String(item.id) === value)?.text} />
             ))}
           </div>
         )}
       >
         {options.map((option) => (
-          <MenuItem key={option.id} value={option.text}>
+          <MenuItem key={option.id} value={String(option.id)}>
             {option.text}
           </MenuItem>
         ))}
