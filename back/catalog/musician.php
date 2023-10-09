@@ -1,14 +1,16 @@
-<?php
+<?php 
 include "../dataBaseConect/dataBaseConect.php";
 include "../coors/coors.php";
-function obtenerRegistrosAsistencias() {
+
+
+function getMusician() {
     try {
         $conn = conectarBD();
         if (!$conn) {
             return null;
         }
         
-        $query = 'SELECT * FROM `registroasistencias`';
+        $query = 'SELECT * from musician;';
         $stmt = $conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -24,14 +26,15 @@ function obtenerRegistrosAsistencias() {
     }
 }
 
-// Ejemplo de uso
-$registros = obtenerRegistrosAsistencias();
+
+
+
+
+
+
+
+
+$registros = getMusician();
 echo($registros)
-// if ($registros) {
-//     foreach ($registros as $registro) {
-//         echo "ID: " . $registro['id'] . ", Fecha: " . $registro['fecha'] . "<br>";
-//     }
-// } else {
-//     echo "No se pudieron obtener los registros.";
-// }
+
 ?>

@@ -1,0 +1,2 @@
+/* obtiene el ensayo con su fecha,hora inicio,hora fin, su id numero de asistidos, y numero de no asistidos */
+SELECT rehearsal.id, rehearsal.date, rehearsal.start_time as startOn, rehearsal.end_time as endOn, SUM( case WHEN historicalattendance.assited = 1 THEN 1 else 0 end) as assisted,SUM( case WHEN historicalattendance.assited = 0 THEN 1 else 0 end) as notAssisted from rehearsal INNER JOIN historicalattendance on rehearsal.id = historicalattendance.idRehearsal 

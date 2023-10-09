@@ -1,4 +1,5 @@
 export enum Routes {
     BANDA="/banda", 
-    ENSAYOS="/ensayos"
+    ENSAYOS="/ensayos", 
+    ENSAYO="/ensayos/:id"
 }

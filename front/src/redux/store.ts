@@ -1,12 +1,16 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import reducerExampleSlider from "./reducers/exampleReducer"
 import headerReducer from "./reducers/header/headerReducer";
-import listaEnsayosReducer from "./reducers/ensayos/list";
+import rehearsalListReducer from "./reducers/rehearsal/list";
+import rehearsalFormReducer from "./reducers/rehearsal/form";
+import catalogReducer from "./reducers/catalog/catalog";
 export const store = configureStore({
     reducer: {
         reducerExample: reducerExampleSlider,
         header: headerReducer,
-        listaEnsayos: listaEnsayosReducer
+        rehearsalList: rehearsalListReducer,
+        rehearsalForm: rehearsalFormReducer, 
+        catalog:catalogReducer
 
     },
     devTools: process.env.NODE_ENV !== "production",

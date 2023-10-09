@@ -1,17 +1,17 @@
-import { createBrowserRouter, useRoutes } from "react-router-dom";
+import {  useRoutes } from "react-router-dom";
 import { Routes } from "../common/enums/routes";
 import { BandaContainer } from "../pages/banda/container";
-import { EnsayosContainer } from "../pages/ensayos/container";
+import { RehearsalContainer } from "../pages/rehearsal/container";
 
 export const RoutesApp = () => {
     return useRoutes([
         {
             path: "/",
-            element: <EnsayosContainer/>
+            element: <RehearsalContainer/>
         },
         {
             path: Routes.ENSAYOS,
-            element: <EnsayosContainer/>
+            element: <RehearsalContainer/>
         },
 
         {

@@ -7,7 +7,7 @@ export const AppStyle = createUseStyles({
     main: {
         width: "100%",
         height: "auto",
-
-        maxHeight: "calc(92.5vh - 1rem)"
+        maxHeight: "calc(92.5vh - 1rem)", 
+        overflow:"none"
     }
 })
