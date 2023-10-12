@@ -9,6 +9,7 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { Buttons } from "../buttons/button";
 import { PopUpStyle } from "./popUpStyle.jss";
+import { ButtonVariants } from "../../common/enums/buttons";
 
 interface IPopUpProps {
   showPopUp: boolean;
@@ -16,7 +17,7 @@ interface IPopUpProps {
   onCancel: () => void;
   component: any;
   title: string;
-  disabled:boolean;
+  disabled: boolean;
 }
 
 export const PopUp: React.FC<IPopUpProps> = ({
@@ -25,7 +26,7 @@ export const PopUp: React.FC<IPopUpProps> = ({
   onSave,
   component,
   title,
-  disabled
+  disabled,
 }) => {
   const style = PopUpStyle();
 
@@ -54,7 +55,7 @@ export const PopUp: React.FC<IPopUpProps> = ({
             position: "absolute" as "absolute",
             top: 10,
             left: 10,
-            fontWeight:"bolder"
+            fontWeight: "bolder",
           }}
         >
           {title}
@@ -70,7 +71,11 @@ export const PopUp: React.FC<IPopUpProps> = ({
         </IconButton>
         <div className={style.contenr}>{component}</div>
         <div className={style.actions}>
-          <Buttons label="Cerrar" onClick={onCancel} />
+          <Buttons
+            label="Cerrar"
+            variant={ButtonVariants.OUTLINED}
+            onClick={onCancel}
+          />
           <Buttons disabled={disabled} label="Aceptar" onClick={onSave} />
         </div>
       </Box>

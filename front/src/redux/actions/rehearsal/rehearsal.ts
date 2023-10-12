@@ -36,37 +36,57 @@ export const fetchRehearsalList = (): AppThunk => async (dispatch) => {
   }
 };
 
-export const postRehearsalForm = (): AppThunk => async (dispatch) => {
 
-  try {
-    const { form } = store.getState().rehearsalForm
 
-    dispatch(setRehearsalFormLoading(true));
-    await axios
-      .post(apiUrl, httpData(HttpMethod.POST, { ...form, date: dayjs(form.date).format(FormatDate.DATE) }))
-      .then((res) => {
 
-        // dispatch(setRehearsalList(res.data));
-      })
-      .catch((response) => {
-      });
 
-    //  dispatch(resetState());
-  } catch (error) {
 
-  } finally {
-    dispatch(setRehearsalFormLoading(false));
-  }
-};
-
-// const mapMusicianList = (assisted:string[], notAssisted:string[])=> {
-// let list =[];
-// assisted.map(())
-
-// }
 
 export const resetRehearsalForm = (): AppThunk => async (dispatch) => {
   dispatch(resetState());
 };
 
 
+export const postRehearsalForm = (): any => {
+  return async (dispatch: any) => {
+
+    try {
+      const { form } = store.getState().rehearsalForm
+
+      dispatch(setRehearsalFormLoading(true));
+      await axios
+        .post(apiUrl, httpData(HttpMethod.POST, { ...form, date: dayjs(form.date).format(FormatDate.DATE) }))
+        .then((res) => {
+          dispatch(fetchRehearsalList())
+        })
+      return true;
+    } catch (error) {
+      return false;
+    } finally {
+      dispatch(setRehearsalFormLoading(false));
+    }
+  }
+}
+
+
+export const removeRehearsal = (): any => {
+  return async (dispatch: any) => {
+    try {
+      const { id } = store.getState().rehearsalForm.form
+
+      dispatch(setRehearsalFormLoading(true));
+     const response =  await axios
+        .post(apiUrl, httpData(HttpMethod.DELETE, { id }))
+        .then((res:any) => {  
+          dispatch(fetchRehearsalList())
+        });
+
+
+      return response;
+    } catch (error) {
+      return false;
+    } finally {
+      dispatch(setRehearsalFormLoading(false));
+    }
+  }
+}

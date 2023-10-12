@@ -58,9 +58,7 @@ function createEnsayoYRegistroAsistenca ($data){
             $stmt->bindValue(':date', $date);
             $stmt->bindValue(':startOn', $startOn);
             $stmt->bindValue(':endOn', $endOn);
-    
-            $stmt->execute();
-    
+
             if ($stmt->execute()) {
                 $lastId = $conn->lastInsertId();
                 $list = array();
@@ -90,10 +88,29 @@ function createEnsayoYRegistroAsistenca ($data){
         }  
 }
 
+function deleteEnsayo ($id) {
+    try {
+        // Correcto
+        $conn = conectarBD();
+        if (!$conn) {
+            return null;
+        }
+    
+        $query = "DELETE FROM `rehearsal` WHERE id =:id";
+
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue(':id', $id);            
+        $stmt->execute();
+        return json_encode(true); 
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }     
+}
+
 $request_body = file_get_contents('php://input');
 $data = json_decode($request_body, true);
 $metod = strtoupper(html($data['metod']));
-$form = $data['data'];
+    $form = $data['data'];
 
 
 
@@ -103,10 +120,16 @@ if ($metod == "GET") {
 }
 
 if ($metod == "POST") {
+
     createEnsayoYRegistroAsistenca($form);
     echo(json_encode(true));
 
 }  
+
+if ($metod == 'REMOVE') {
+$id = $form['id'];
+echo deleteEnsayo($id);
+}
 
     
 

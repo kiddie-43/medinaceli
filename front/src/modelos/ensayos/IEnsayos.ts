@@ -13,8 +13,8 @@ export interface IRehearsalForm {
     startOn: string;
     endOn: string;
     assisted: string[]
-
     notAsisted: string[];
+    id?:number;
 }
 
 

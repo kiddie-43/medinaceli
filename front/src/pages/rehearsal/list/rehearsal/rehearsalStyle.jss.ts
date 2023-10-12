@@ -23,7 +23,8 @@ export const RehearsalStyle = createUseStyles({
     actionsCard: {
         width: "100%",
         display: "flex",
-        justifyContent: "end"
+        justifyContent: "end",
+        gap:30
     },
     content: {
         display: "flex",
